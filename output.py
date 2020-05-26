@@ -15,11 +15,11 @@ canvas1.create_window(150, 60, window=label1)
 def getTxt():
     global read_file
 
-    import_file_path = filedialog.askopenfilename()
+    import_file_path = filedialog.askopenfilename(filetypes = (("dat files","*.dat"),))
     read_file = pd.read_csv(import_file_path)
 
 
-browseButtonTxt = tk.Button(text="      Import Text File     ", command=getTxt, bg='green', fg='white',
+browseButtonTxt = tk.Button(text="      Import DAT File     ", command=getTxt, bg='green', fg='white',
                             font=('helvetica', 12, 'bold'))
 canvas1.create_window(150, 130, window=browseButtonTxt)
 
@@ -31,7 +31,7 @@ def convertToCsv():
     read_file.to_csv(export_file_path, index=None)
 
 
-saveAsButtonCsv = tk.Button(text='Convert Text to CSV', command=convertToCsv, bg='green', fg='white',
+saveAsButtonCsv = tk.Button(text='Convert DAT to CSV', command=convertToCsv, bg='green', fg='white',
                             font=('helvetica', 12, 'bold'))
 canvas1.create_window(150, 180, window=saveAsButtonCsv)
 
