@@ -1,23 +1,38 @@
-from os.path import basename
 import tkinter as tk
-import numpy as np
-from tkinter.filedialog import asksaveasfilename, askopenfilename
+from tkinter import filedialog
+import pandas as pd
 
 root = tk.Tk()
 
-def upload():
-    # Open the file choosen by the user
-    filename = askopenfilename(filetypes=(("csv files", "*.csv"),))
-    data = np.genfromtxt(filename, delimiter=",", names=True, dtype=None)
+canvas1 = tk.Canvas(root, width=300, height=300, bg='lightsteelblue2', relief='raised')
+canvas1.pack()
+
+label1 = tk.Label(root, text='File Conversion Tool', bg='lightsteelblue2')
+label1.config(font=('helvetica', 20))
+canvas1.create_window(150, 60, window=label1)
 
 
-def download():
-    pass
+def getTxt():
+    global read_file
 
-btn1 = tk.Button(root, text="Upload .dat file", command=upload)
-btn2 = tk.Button(root, text="Download .csv file", command=download)
+    import_file_path = filedialog.askopenfilename()
+    read_file = pd.read_csv(import_file_path)
 
-btn1.pack()
-btn2.pack()
+
+browseButtonTxt = tk.Button(text="      Import Text File     ", command=getTxt, bg='green', fg='white',
+                            font=('helvetica', 12, 'bold'))
+canvas1.create_window(150, 130, window=browseButtonTxt)
+
+
+def convertToCsv():
+    global read_file
+
+    export_file_path = filedialog.asksaveasfilename(defaultextension='.csv')
+    read_file.to_csv(export_file_path, index=None)
+
+
+saveAsButtonCsv = tk.Button(text='Convert Text to CSV', command=convertToCsv, bg='green', fg='white',
+                            font=('helvetica', 12, 'bold'))
+canvas1.create_window(150, 180, window=saveAsButtonCsv)
 
 root.mainloop()
