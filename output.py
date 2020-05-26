@@ -4,7 +4,8 @@ import pandas as pd
 
 root = tk.Tk()
 
-canvas1 = tk.Canvas(root, width=300, height=300, bg='lightsteelblue2', relief='raised')
+canvas1 = tk.Canvas(root, width=300, height=300,
+                    bg='lightsteelblue2', relief='raised')
 canvas1.pack()
 
 label1 = tk.Label(root, text='File Conversion Tool', bg='lightsteelblue2')
@@ -15,7 +16,8 @@ canvas1.create_window(150, 60, window=label1)
 def getTxt():
     global read_file
 
-    import_file_path = filedialog.askopenfilename(filetypes = (("dat files","*.dat"),))
+    import_file_path = filedialog.askopenfilename(
+        filetypes=(("dat files", "*.dat"),))
     read_file = pd.read_csv(import_file_path)
 
 
